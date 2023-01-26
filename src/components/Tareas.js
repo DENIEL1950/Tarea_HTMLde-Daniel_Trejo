@@ -1,42 +1,55 @@
 //Componente que muestra las actividades (tareas) diarias de una persona
-import React from 'react'
+import React, {useState} from "react";
+import { datos } from "./datos";
 
 function Tareas() {
-    const listadoTareas=[
-        {
-            titulo: "Estudiar Física",
-            responsable: "Pedro Alvarado",
-            descripcion: "Leer el capítulo 5 página 67",
-            prioridad: "mediana"
-        },
-        {
-            titulo: "Reparar computadora",
-            responsable: "Galo del Castillo",
-            descripcion: "Cambiar el disco duro",
-            prioridad: "alta"
-        },
-        {
-            titulo: "Entrenar fútbol",
-            responsable: "Enrique Ponce",
-            descripcion: "Una hora de trabajo técnico y táctico",
-            prioridad: "baja"
-        },           
-    ];
+  const [listadoTareas, setListadoTareas] = useState(datos);
+  //const listadoTareas = datos;
 
-    console.log("Lista de tareas");
-    console.log(listadoTareas);
-    
+  const eliminarHandlee = (item)=>{
+      if(window.confirm("Confrime que sea elimnar esta tarea ?"))
+      {
+        const nuevaLista = listadoTareas.filter( tarea => {
+          return tarea.titulo!==item.titulo;
+        });
+        //console.log("nueva lista", nuevalista)
+        setListadoTareas(nuevaLista);
+      }
+      //console.log("Dato a eliminar", item);     
+  }
+  //console.log("Nueva lista", nuevaLista);
+  //console.log(listadoTareas);
+
   return (
     <div>
-        <ul>
-            {
-                listadoTareas.map( (item, index) => {
-                    return <li key={index}>{item.titulo}</li>
-                })
-            }
-        </ul>
+      <div className="container">
+        <div className="row mt-4">
+          {listadoTareas.map((item, index) => {
+            return (
+              <div className="col-md-4" key={index}>
+                <div className="card mt-4">
+                  <div className="card-header">
+                    <h3>{item.titulo}</h3>
+                  </div>
+                  
+                  <div className="card-body">
+                    <p><strong>{item.responsable}</strong></p>
+                    <p>{item.descripcion}</p>
+                  </div>
+
+                  <div className="card-footer">
+                    <mark>{item.prioridad}</mark>
+                    <p></p><buttom className="btn btn-primary" onClick={()=>eliminarHandlee(item)}>Eliminar</buttom>
+                  </div>
+
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
-export default Tareas
+export default Tareas;

@@ -9,9 +9,8 @@ function App() {
     <div className="App">
       <h1>Primeros pasos con REACT</h1>
       <h2>Bienvenidos</h2>
-      <Saludos nombre="Kléber" apellido="Posligua"/>
-      <Ejercicio nombre="Andrés" edad="23" pasatiempo="escuchar música" />
-      
+      <Saludos nombre="Daniel" apellido="Trejo"/>
+      <Ejercicio nombre="Julio" edad="23" pasatiempo="escuchar música" />
       <Tareas/>
 
     </div>
